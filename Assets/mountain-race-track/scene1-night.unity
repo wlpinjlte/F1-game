@@ -38877,7 +38877,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0
-  m_Mass: 200
+  m_Mass: 2000
   m_WheelDampingRate: 2
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -44450,7 +44450,7 @@ MonoBehaviour:
   frontRightWheel: {fileID: 1738392739}
   rearLeftWheel: {fileID: 1811264605}
   rearRightWheel: {fileID: 1796656346}
-  motorTorque: 10000
+  motorTorque: 1e+35
   maxSteeringAngle: 25
 --- !u!54 &1462604833
 Rigidbody:
@@ -52052,7 +52052,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0
-  m_Mass: 200
+  m_Mass: 2000
   m_WheelDampingRate: 2
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -53603,7 +53603,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0
-  m_Mass: 200
+  m_Mass: 2000
   m_WheelDampingRate: 2
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
@@ -53756,7 +53756,7 @@ WheelCollider:
     targetPosition: 0.5
   m_SuspensionDistance: 0
   m_ForceAppPointDistance: 0
-  m_Mass: 200
+  m_Mass: 2000
   m_WheelDampingRate: 2
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
