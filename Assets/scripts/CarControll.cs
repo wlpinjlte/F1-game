@@ -7,8 +7,8 @@ public class CarControll1 : MonoBehaviour
     public WheelCollider rearLeftWheel;
     public WheelCollider rearRightWheel;
 
-    public float motorTorque = 10000f; // Sta�a moc silnika
-    public float maxSteeringAngle = 25f; // Maksymalny k�t skr�tu
+    public float motorTorque = 10000f;
+    public float maxSteeringAngle = 25f;
 
     void Start()
     {

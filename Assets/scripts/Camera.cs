@@ -14,13 +14,13 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        // Kamera zawsze patrzy na bolid
+        transform.LookAt(car);
+
         // Oblicz docelow¹ pozycjê kamery
         Vector3 targetPosition = car.position + car.TransformDirection(offset);
 
         // P³ynne przesuwanie kamery
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
-
-        // Kamera zawsze patrzy na bolid
-        transform.LookAt(car);
     }
 }
