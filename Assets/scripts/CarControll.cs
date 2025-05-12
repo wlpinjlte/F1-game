@@ -1,40 +1,72 @@
 using UnityEngine;
 
-public class CarControll1 : MonoBehaviour
+public class CarControll : MonoBehaviour
 {
-    public WheelCollider frontLeftWheel;
-    public WheelCollider frontRightWheel;
-    public WheelCollider rearLeftWheel;
-    public WheelCollider rearRightWheel;
+    private float horizontalInput;
+    private float verticalInput;
+    private float steerAngle;
+    private bool isBreaking;
 
-    public float motorTorque = 10000f;
-    public float maxSteeringAngle = 25f;
+    public WheelCollider frontLeftWheelCollider;
+    public WheelCollider frontRightWheelCollider;
+    public WheelCollider rearLeftWheelCollider;
+    public WheelCollider rearRightWheelCollider;
 
-    void Start()
-    {
+    public float maxSteeringAngle = 35f;
+    public float motorForce = 1000f;
+    public float brakeForce = 3000f;
+
+    void Awake() {
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.maxAngularVelocity = 1000000f;
-        rb.linearDamping = 0.1f; // lub nawet mniejsze
-        rb.angularDamping = 0.05f;
+        rb.mass = 1200f;
     }
 
-    void FixedUpdate()
+    private void Start() {
+        WheelFrictionCurve sidewaysFriction = frontLeftWheelCollider.sidewaysFriction;
+        sidewaysFriction.extremumSlip = 0.2f;
+        sidewaysFriction.extremumValue = 1f;
+        sidewaysFriction.asymptoteSlip = 0.5f;
+        sidewaysFriction.asymptoteValue = 0.75f;
+        sidewaysFriction.stiffness = 2f;
+
+        frontLeftWheelCollider.sidewaysFriction = sidewaysFriction;
+        frontRightWheelCollider.sidewaysFriction = sidewaysFriction;
+        rearLeftWheelCollider.sidewaysFriction = sidewaysFriction;
+        rearRightWheelCollider.sidewaysFriction = sidewaysFriction;
+    }
+
+    private void FixedUpdate()
     {
-        MoveForward();
+        GetInput();
+        HandleMotor();
         HandleSteering();
     }
 
-    void MoveForward()
+    private void GetInput()
     {
-        float Vdirection = Input.GetAxis("Vertical");
-        frontLeftWheel.motorTorque = motorTorque * Vdirection;
-        frontRightWheel.motorTorque = motorTorque * Vdirection;
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        isBreaking = Input.GetKey(KeyCode.Space);
     }
 
-    void HandleSteering()
+    private void HandleSteering()
     {
-        float steering = Input.GetAxis("Horizontal") * maxSteeringAngle;
-        frontLeftWheel.steerAngle = steering;
-        frontRightWheel.steerAngle = steering;
+        steerAngle = maxSteeringAngle * horizontalInput;
+        frontLeftWheelCollider.steerAngle = steerAngle;
+        frontRightWheelCollider.steerAngle = steerAngle;
+    }
+
+    private void HandleMotor()
+    {
+        frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
+        frontRightWheelCollider.motorTorque = verticalInput * motorForce;
+        rearLeftWheelCollider.motorTorque = verticalInput * motorForce;
+        rearRightWheelCollider.motorTorque = verticalInput * motorForce;
+
+        brakeForce = isBreaking ? 3000f : 0f;
+        frontLeftWheelCollider.brakeTorque = brakeForce;
+        frontRightWheelCollider.brakeTorque = brakeForce;
+        rearLeftWheelCollider.brakeTorque = brakeForce;
+        rearRightWheelCollider.brakeTorque = brakeForce;
     }
 }
