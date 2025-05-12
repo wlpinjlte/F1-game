@@ -23,10 +23,6 @@ public class CarControll : MonoBehaviour
 
     private void Start() {
         WheelFrictionCurve sidewaysFriction = frontLeftWheelCollider.sidewaysFriction;
-        sidewaysFriction.extremumSlip = 0.2f;
-        sidewaysFriction.extremumValue = 1f;
-        sidewaysFriction.asymptoteSlip = 0.5f;
-        sidewaysFriction.asymptoteValue = 0.75f;
         sidewaysFriction.stiffness = 2f;
 
         frontLeftWheelCollider.sidewaysFriction = sidewaysFriction;
@@ -63,10 +59,10 @@ public class CarControll : MonoBehaviour
         rearLeftWheelCollider.motorTorque = verticalInput * motorForce;
         rearRightWheelCollider.motorTorque = verticalInput * motorForce;
 
-        brakeForce = isBreaking ? 3000f : 0f;
+        /*brakeForce = isBreaking ? 3000f : 0f;
         frontLeftWheelCollider.brakeTorque = brakeForce;
         frontRightWheelCollider.brakeTorque = brakeForce;
         rearLeftWheelCollider.brakeTorque = brakeForce;
-        rearRightWheelCollider.brakeTorque = brakeForce;
+        rearRightWheelCollider.brakeTorque = brakeForce;*/
     }
 }
