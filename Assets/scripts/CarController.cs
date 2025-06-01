@@ -12,18 +12,19 @@ public class CarControll : MonoBehaviour
     public WheelCollider rearLeftWheelCollider;
     public WheelCollider rearRightWheelCollider;
 
-    public float maxSteeringAngle = 35f;
+    public float maxSteeringAngle = 20f;
     public float motorForce = 1000f;
     public float brakeForce = 3000f;
+    public float stiffness = 2f;
 
     void Awake() {
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.mass = 1200f;
+        rb.centerOfMass = new Vector3(0f, -0.5f, 0f);
     }
 
     private void Start() {
         WheelFrictionCurve sidewaysFriction = frontLeftWheelCollider.sidewaysFriction;
-        sidewaysFriction.stiffness = 2f;
+        sidewaysFriction.stiffness = stiffness;
 
         frontLeftWheelCollider.sidewaysFriction = sidewaysFriction;
         frontRightWheelCollider.sidewaysFriction = sidewaysFriction;
