@@ -12,6 +12,7 @@ public class CarControll : MonoBehaviour
     public WheelCollider rearLeftWheelCollider;
     public WheelCollider rearRightWheelCollider;
 
+    public float mass = 1200f;
     public float maxSteeringAngle = 20f;
     public float motorForce = 1000f;
     public float brakeForce = 3000f;
@@ -19,6 +20,7 @@ public class CarControll : MonoBehaviour
 
     void Awake() {
         Rigidbody rb = GetComponent<Rigidbody>();
+        rb.mass = mass;
         rb.centerOfMass = new Vector3(0f, -0.5f, 0f);
     }
 
