@@ -11,6 +11,7 @@ public class EndLevel : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         gameManager.setBestTime();
-        SceneManager.LoadScene(1);
+        gameManager.Start();
+        // SceneManager.LoadScene(1);
     }
 }
