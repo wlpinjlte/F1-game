@@ -9,6 +9,7 @@ using Unity.MLAgents.Sensors;
 public class CarAgent : Agent
 {
     private CarController carController;
+    public bool finished = false; 
 
     //called once at the start
     public override void Initialize()
@@ -28,7 +29,10 @@ public class CarAgent : Agent
     //Collecting extra Information that isn't picked up by the RaycastSensors
     public override void CollectObservations(VectorSensor sensor)
     {
-        AddReward(-0.001f);
+        if (!finished)
+        {
+            AddReward(-0.001f);
+        }
     }
 
     //Processing the actions received

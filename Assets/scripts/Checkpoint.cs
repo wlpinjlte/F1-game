@@ -7,7 +7,7 @@ public class Checkpoint : MonoBehaviour
         if (other.GetComponent<CarAgent>() != null)
         {
             other.GetComponent<CarAgent>().AddReward(0.1f);
-            Debug.Log("checkpoint");
+            // Debug.Log("checkpoint");
         }
     }
 }

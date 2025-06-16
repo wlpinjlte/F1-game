@@ -52,7 +52,7 @@ public class CarController : MonoBehaviour
 
     private void HandleSteering()
     {
-        Debug.Log("steer: " + verticalInput);
+        // Debug.Log("steer: " + verticalInput);
         steerAngle = maxSteeringAngle * horizontalInput;
         frontLeftWheelCollider.steerAngle = steerAngle;
         frontRightWheelCollider.steerAngle = steerAngle;
@@ -60,7 +60,7 @@ public class CarController : MonoBehaviour
 
     private void HandleMotor()
     {
-        Debug.Log("motor: " + verticalInput);
+        // Debug.Log("motor: " + verticalInput);
         brakeForce = verticalInput < -0.7f ? 3000f : 0f;
         verticalInput = verticalInput < 0 ? 0f : verticalInput;
 
