@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CarControll : MonoBehaviour
+public class CarController : MonoBehaviour
 {
     private float horizontalInput;
     private float verticalInput;
@@ -18,13 +18,15 @@ public class CarControll : MonoBehaviour
     public float brakeForce = 3000f;
     public float stiffness = 2f;
 
-    void Awake() {
+    void Awake()
+    {
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.mass = mass;
         rb.centerOfMass = new Vector3(0f, -0.5f, 0f);
     }
 
-    private void Start() {
+    private void Start()
+    {
         WheelFrictionCurve sidewaysFriction = frontLeftWheelCollider.sidewaysFriction;
         sidewaysFriction.stiffness = stiffness;
 
@@ -36,7 +38,7 @@ public class CarControll : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetInput();
+        // GetInput();
         HandleMotor();
         HandleSteering();
     }
@@ -50,6 +52,7 @@ public class CarControll : MonoBehaviour
 
     private void HandleSteering()
     {
+        // Debug.Log("steer: " + verticalInput);
         steerAngle = maxSteeringAngle * horizontalInput;
         frontLeftWheelCollider.steerAngle = steerAngle;
         frontRightWheelCollider.steerAngle = steerAngle;
@@ -57,15 +60,30 @@ public class CarControll : MonoBehaviour
 
     private void HandleMotor()
     {
+        // Debug.Log("motor: " + verticalInput);
+        brakeForce = verticalInput < -0.7f ? 3000f : 0f;
+        verticalInput = verticalInput < 0 ? 0f : verticalInput;
+
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
         frontRightWheelCollider.motorTorque = verticalInput * motorForce;
         rearLeftWheelCollider.motorTorque = verticalInput * motorForce;
         rearRightWheelCollider.motorTorque = verticalInput * motorForce;
 
-        /*brakeForce = isBreaking ? 3000f : 0f;
         frontLeftWheelCollider.brakeTorque = brakeForce;
         frontRightWheelCollider.brakeTorque = brakeForce;
         rearLeftWheelCollider.brakeTorque = brakeForce;
-        rearRightWheelCollider.brakeTorque = brakeForce;*/
+        rearRightWheelCollider.brakeTorque = brakeForce;
+    }
+
+    public void Steer(float input)
+    {
+        // Debug.Log(input);
+        horizontalInput = input;
+    }
+
+    public void ApplyAcceleration(float input)
+    {
+        // Debug.Log(input);
+        verticalInput = input;
     }
 }
